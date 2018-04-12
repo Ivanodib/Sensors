@@ -1,14 +1,14 @@
 <?php
 include("connessione.php");
 
-if(isset($_POST["Login"])){
+if(isset($_POST['Login'])){
 // login
 
 header("location: login.php");
 
 }
 
-if(isset($_POST["Registrazione"])){
+if(isset($_POST['Registrazione'])){
 // registrazione
 
 header("location: registrazione.php");
