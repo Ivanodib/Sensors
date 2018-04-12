@@ -43,9 +43,9 @@ $result = mysql_query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` 
 $i=0;
 
     while ($row = mysql_fetch_assoc($result)) {
-    $campo = $row["COLUMN_NAME"];
+    $campo = $row['COLUMN_NAME'];
     if($datiRilevazione[$i] == "1"){
-	    $query = $query.$row["COLUMN_NAME"].",";
+	    $query = $query.$row['COLUMN_NAME'].",";
       
     }
    
@@ -114,4 +114,4 @@ unlink($nomefile);
 
 
 </body>
-</html>
+</html>
