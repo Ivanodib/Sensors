@@ -1,8 +1,8 @@
 <?php
 include("connessione.php");
 
-if(isset($_POST["Stringa"])){
-$stringa = $_POST["Stringa"];
+if(isset($_POST['Stringa'])){
+$stringa = $_POST['Stringa'];
 
 
 $Fk_Sensore = substr($stringa, 0, 10);
@@ -66,4 +66,4 @@ echo '<script> alert("Errore di rete") </script>';
 </div>
 
 </body>
-</html>
+</html>
