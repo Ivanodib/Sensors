@@ -1,0 +1,284 @@
+<?php
+include('connessione.php');
+session_start();
+
+$flag_sens =0;
+$flag_uten =0;
+
+function aggiungiZeri($marcaTipo){
+return  str_pad($marcaTipo, 20, "0", STR_PAD_LEFT); 
+}
+
+if(isset($_POST['VisualizzaSensori'])){
+$flag_sens =1;
+}
+
+if(isset($_POST['VisualizzaUtenti'])){
+$flag_uten =1;
+}
+
+//AGGIUNGI SENSORE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if(isset($_POST['Inserisci'])){
+if(isset($_POST['Marca']) && isset($_POST['Tipologia']) && isset($_POST['Fk_Utente'])){
+
+$marca = $_POST['Marca'];
+$tipologia = $_POST['Tipologia'];
+$fkutente = $_POST['Fk_Utente'];
+
+$m2 = aggiungiZeri($marca);
+
+$t2 = aggiungiZeri($tipologia);
+
+
+$controlloSensore = "SELECT Id_Sensore FROM Sensore WHERE Marca = '".$m2."'  AND Tipologia = '".$t2."' 
+						AND Fk_Utente = '".$fkutente."'  ";
+$risultatoSensore = mysqli_query($connessione, $controlloSensore);
+
+//esiste
+if(mysqli_num_rows($risultatoSensore)>0){
+echo '<script> alert("Questo utente ha già un sensore con la stessa marca e tipologia");</script>';
+}
+
+//non esiste
+else{
+$queryInserisci = "INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
+						VALUES('$fkutente','$m2','$t2') " ;
+                        
+$risultatoInserimento = mysqli_query($connessione, $queryInserisci);  
+}
+
+if($risultatoInserimento){
+echo '<script> alert("Sensore inserito correttamente");</script>';
+}
+else{
+echo '<script> alert("Errore di rete");</script>';
+
+}
+
+
+}//fine isset inputs
+}//fine inserisci button.
+
+
+//ELIMINA SENSORE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if(isset($_POST['Elimina'])){
+if(isset($_POST['Fk_Sensore'])){
+$fksensore = $_POST['Fk_Sensore'];
+
+
+
+$controlloSensore = "SELECT Id_Sensore FROM Sensore WHERE Id_Sensore = '".$fksensore."' ";
+$risultatoSensore = mysqli_query($connessione, $controlloSensore);
+
+//sensore esistente, quindi elimino.
+if(mysqli_num_rows($risultatoSensore)>0){
+
+$queryElimina = "DELETE FROM Sensore WHERE Id_Sensore = '".$fksensore."'  ";                        
+$risultatoEliminazione = mysqli_query($connessione, $queryElimina);  
+
+
+
+if($risultatoEliminazione){
+echo '<script> alert("Sensore eliminato correttamente");</script>';
+}
+else{
+echo '<script> alert("Errore di rete");</script>';
+
+}
+}
+else {
+echo '<script> alert("Sensore inesistente");</script>';
+
+}
+
+
+}
+}
+
+
+//ELIMINA UTENTE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if(isset($_POST['EliminaUtente'])){
+if(isset($_POST['Id_Utente'])){
+$idutente = $_POST['Id_Utente'];
+
+
+
+$controlloUtente = "SELECT IdUtente FROM Utenti WHERE IdUtente = '".$idutente."' ";
+$risultatoUtente = mysqli_query($connessione, $controlloUtente);
+
+//sensore esistente, quindi elimino.
+if(mysqli_num_rows($risultatoUtente)>0){
+
+$queryElimina = "DELETE FROM Utenti WHERE IdUtente = '".$idutente."'  ";                        
+$risultatoEliminazione = mysqli_query($connessione, $queryElimina);  
+
+$queryEliminaS = "DELETE FROM Sensore WHERE Fk_Utente = '".$idutente."'  ";                        
+$risultatoEliminazioneS = mysqli_query($connessione, $queryEliminaS);
+
+if($risultatoEliminazione){
+echo '<script> alert("Utente eliminato correttamente");</script>';
+}
+else{
+echo '<script> alert("Errore di rete");</script>';
+
+}
+}
+else {
+echo '<script> alert("Utente inesistente");</script>';
+
+}
+
+
+}
+}
+
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADMIN</title>
+</head>
+<body style="background-color:#d6ffa8 !important;">
+
+<div class="container">
+
+
+ <div class="row">
+  <div class="col-sm-4">
+  <h2> GESTIONE SENSORE </h2><br>
+
+<h3> Inserisci sensore </h3>
+<form action="admin.php" method="post">
+<input type="number" class="form-control" placeholder="Inserisci Id cliente" name="Fk_Utente" required><br>
+<input type="text" class="form-control" placeholder="Inserisci marca" name="Marca" required><br>
+<input type="text" class="form-control" placeholder="Inserisci tipologia" name="Tipologia" required><br>
+<input type="submit" class="btn btn-default" value="Inserisci" name="Inserisci">
+</form>
+
+<br><br>
+<h3> Elimina sensore </h3>
+<form action="admin.php" method="post">
+<input type="number" class="form-control" placeholder="Inserisci Id sensore" name="Fk_Sensore" required><br>
+<input type="submit" class="btn btn-default" value="Elimina" name="Elimina">
+</form><br><br>
+
+
+<form action="admin.php" method="post">
+<input type="submit" class="btn btn-default" value="Visualizza sensori" name="VisualizzaSensori">
+<table class="table">
+
+<?php
+global $flag_sens;
+global $idutente;
+
+if($flag_sens){
+$vis= mysqli_query($connessione, "SELECT * FROM Sensore ORDER BY Fk_Utente ");
+
+echo"<tr>";
+echo"<th class='th'>CODICE SENSORE</th>";
+echo"<th class='th'>CODICE UTENTE</th>";
+echo"<th class='th'>MARCA</th>";
+echo"<th class='th'>TIPOLOGIA</th>";
+
+echo"</tr>";
+
+}
+while ($row = mysqli_fetch_assoc($vis)) {
+		echo"<tr>";
+        echo "<td class='td'> ". $row['Id_Sensore']."</td> ";
+        echo "<td class='td'> ". $row['Fk_Utente']." </td>";
+         echo "<td class='td'> ". $row['Marca']." </td>";
+          echo "<td class='td'> ". $row['Tipologia']." </td>";
+        echo "</tr>";
+        }
+
+?>
+</table>
+</form>
+
+  
+  </div>
+<div class="col-sm-4" ><br><br><br><br>
+</div>
+  
+  <div class="col-sm-4" >
+  <h2> GESTIONE CLIENTI </h2><br>
+  
+  <h3> Inserisci cliente </h3>
+  <form  action="registrazione.php" method="post">
+  <input type="text"  class="form-control" placeholder="Inserisci nome" name="NomeUtente" required><br>
+<input type="email" class="form-control" placeholder="Inserisci email" name="EmailUtente" required><br>
+<input type="password" class="form-control" placeholder="Inserisci password" name="PasswordUtente" required><br>
+<input type="password" class="form-control" placeholder="Ripeti password" name="RipetiPassword" required><br>
+<input type="submit" class="btn btn-default" value="Aggiungi utente" name="AdminReg">
+<input type="hidden" class="form-control" placeholder="Inserisci cognome" name="CognomeUtente" ><br>
+</form><br><br>
+
+<h3> Elimina cliente </h3>
+<form action="admin.php" method="post">
+<input type="number" class="form-control" placeholder="Inserisci Id cliente" name="Id_Utente" required><br>
+<input type="submit" class="btn btn-default" value="Elimina" name="EliminaUtente">
+</form><br><br>
+
+<form action="admin.php" method="post">
+<input type="submit" class="btn btn-default" value="Visualizza clienti" name="VisualizzaUtenti">
+<table class="table">
+
+<?php
+global $flag_uten;
+
+
+if($flag_uten){
+$vis= mysqli_query($connessione, "SELECT * FROM Utenti WHERE CognomeUtente = '0' ");
+
+echo"<tr>";
+echo"<th class='th'>CODICE CLIENTE</th>";
+echo"<th class='th'>NOME CLIENTE</th>";
+echo"<th class='th'>EMAIL</th>";
+echo"<th class='th'>PASSWORD</th>";
+
+echo"</tr>";
+
+}
+while ($row = mysqli_fetch_assoc($vis)) {
+		echo"<tr>";
+        echo "<td class='td'> ". $row['IdUtente']."</td> ";
+        echo "<td class='td'> ". $row['NomeUtente']." </td>";
+         echo "<td class='td'> ". $row['EmailUtente']." </td>";
+          echo "<td class='td'> ". $row['PasswordUtente']." </td>";
+        echo "</tr>";
+        }
+
+?>
+</table>
+</form>
+
+  </div>
+  
+  
+</div> 
+</div>
+
+
+</body>
+</html>
