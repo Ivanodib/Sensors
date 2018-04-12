@@ -31,9 +31,9 @@ $result = mysqli_query($connessione, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCH
 $i=0;
 
     while ($row = mysqli_fetch_assoc($result)) {
-    $campo = $row["COLUMN_NAME"];
+    $campo = $row['COLUMN_NAME'];
     if($datiRilevazione[$i] == "1"){
-	    $query = $query.$row["COLUMN_NAME"].",";
+	    $query = $query.$row['COLUMN_NAME'].",";
       
     }
    
