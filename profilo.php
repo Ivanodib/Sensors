@@ -25,10 +25,15 @@ if(isset($_POST['Cancella'])){
 $idapp = $_POST['CancellaApp'];
 
 
-$cerca = mysqli_query($connessione,"SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$idapp."'  ");
+$cerca = mysqli_prepare($connessione,"SELECT * FROM ApplicazioneEsterna WHERE Codice = ?  ");
+	mysqli_stmt_bind_param($cerca, "i", $idapp);
+	mysqli_stmt_execute($cerca);
+	
 if(mysqli_num_rows($cerca)>0){
 
-$elimina = mysqli_query($connessione,"DELETE FROM ApplicazioneEsterna WHERE Codice = '".$idapp."'  ");
+$elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Codice = ?  ");
+	mysqli_stmt_bind_param($elimina, "i", $idapp);
+	mysqli_stmt_execute($elimina);
 
 if($elimina) echo"<script> alert( 'Applicazione esterna rimossa'); </script>";
 else {echo"<script> alert( 'Errore di rete durante la cancellazione'); </script>"; }
