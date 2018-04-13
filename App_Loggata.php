@@ -5,7 +5,7 @@ $codice = $_SESSION['idapp'];
 
 
 
-$numerorighe = mysqli_query($connessione,"SELECT * FROM Trasferimento") or die(mysql_error());
+$numerorighe = mysqli_query($connessione,"SELECT * FROM Trasferimento");
 $num = mysqli_num_rows($numerorighe);
 
 if(!isset($_SESSION['prec'])){
@@ -27,7 +27,7 @@ $datiRilevazione = $row['Dati_trasferiti'];
 //BLOCCO PER CREARE I CAMPI NELLA SELECT DEI DATI 
 $query;
 $result = mysqli_query($connessione, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
- AND COLUMN_NAME NOT LIKE 'Fk_%'") or die (mysql_error);
+ AND COLUMN_NAME NOT LIKE 'Fk_%'") ;
 $i=0;
 
     while ($row = mysqli_fetch_assoc($result)) {
@@ -52,7 +52,7 @@ $i++;
                             
                            
 //QUERY PER AVERE I DATI
-$totale = mysqli_query($connessione, $querytot) or die(mysqli_error());
+$totale = mysqli_query($connessione, $querytot);
 
 $file = fopen( $nomefile , "w");
 
