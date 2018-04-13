@@ -1,6 +1,6 @@
 <?php
 
-require("connessione.php");
+require "connessione.php";
 session_start();
 
 if(session_unset ()){ 
