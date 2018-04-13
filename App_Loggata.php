@@ -59,7 +59,7 @@ $file = fopen( $nomefile , "w");
 
 while($rigafile = mysqli_fetch_assoc($totale)){
 
-	fputcsv($file, $rigafile) or die("errore");
+	fputcsv($file, $rigafile = chr(0xEF) . chr(0xBB) . chr(0xBF));
   }
   
 fclose($file);
