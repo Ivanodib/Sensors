@@ -35,9 +35,11 @@ $elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Co
 	mysqli_stmt_bind_param($elimina, "i", $idapp);
 	mysqli_stmt_execute($elimina);
 
-if($elimina) {
+if( isset($elimina)) {
+	if($elimina){
 	$r1="<script> alert( 'Applicazione esterna rimossa'); </script>";
 	echo $r1;  
+	}
 }
 else {
 	$r1="<script> alert( 'Errore di rete durante la cancellazione'); </script>";
@@ -218,8 +220,9 @@ $temp = $row['COLUMN_NAME'];
 <?php
 global $flag_vis;
 global $idutente;
-if($flag_vis){
+if(isset($flag_vis)){
 
+	if($flag_vis){
 $vis= mysqli_query($connessione, "SELECT * FROM ApplicazioneEsterna WHERE Fk_Utente = '".$idutente."' ");
 
 echo"<tr>";
@@ -240,6 +243,7 @@ while ($row = mysqli_fetch_assoc($vis)) {
 	$rt = "</tr>"; 
         echo $rt;
         }
+}
 
 ?>
 </table>
@@ -249,8 +253,9 @@ while ($row = mysqli_fetch_assoc($vis)) {
 <?php
 global $flag_dati;
 global $idutente;
-if($flag_dati){
+if(isset($flag_dati)){
 
+	if($flag_dati){
 $d= mysqli_query($connessione, "SELECT * FROM RaccoltaDati INNER JOIN  Sensore ON Fk_Sensore = Id_Sensore
 								INNER JOIN Utenti ON Fk_Utente = IdUtente WHERE IdUtente = '".$idutente."' ");
 
@@ -282,7 +287,7 @@ while ($row = mysqli_fetch_assoc($d)) {
         $rt = "</tr>"; 
         echo $rt;
         }
-
+}
 ?>
 </table>
 <br>
