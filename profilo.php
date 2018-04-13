@@ -35,12 +35,20 @@ $elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Co
 	mysqli_stmt_bind_param($elimina, "i", $idapp);
 	mysqli_stmt_execute($elimina);
 
-if($elimina) echo $r1="<script> alert( 'Applicazione esterna rimossa'); </script>";
-else {echo"<script> alert( 'Errore di rete durante la cancellazione'); </script>"; }
+if($elimina) {
+	$r1="<script> alert( 'Applicazione esterna rimossa'); </script>";
+	echo $r1;  
+}
+else {
+	$r1="<script> alert( 'Errore di rete durante la cancellazione'); </script>";
+	echo $r1;
+		 }
 }
 
 else{
-echo"<script> alert( 'Codice inesistente'); </script>";
+
+	$r1="<script> alert( 'Codice inesistente'); </script>";
+	echo $r1;
 }
 }
 
@@ -72,8 +80,8 @@ $i++;
 }
 //echo $stringa;
 $codice = rand(1,1000000000);
-
-echo"<script> alert( 'CODICE APPLICAZIONE ESTERNA: $codice'); </script>";
+$r1 = "<script> alert( 'CODICE APPLICAZIONE ESTERNA: $codice'); </script>";
+	echo $r1;
 $stmt =  mysqli_prepare($connessione,"INSERT INTO ApplicazioneEsterna (Fk_Utente,Codice,Nome,Dati_trasferiti) 
 			values ('?','?','?','?' )" );
 	mysqli_stmt_bind_param($stmt, "isss", $idutente, $codice, $nome, $stringa);
@@ -222,13 +230,15 @@ echo"</tr>";
 
 }
 while ($row = mysqli_fetch_assoc($vis)) {
-		echo"<tr>";
+	$tr = "<tr>";
+		echo $tr;
 	$r1 = "<td class='td'> ". $row['Codice']."</td> ";
 	$r2 = "<td class='td'> ". $row['Nome']." </td>";
 	
         echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
         echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
-        echo "</tr>";
+	$rt = "</tr>"; 
+        echo $rt;
         }
 
 ?>
@@ -244,17 +254,23 @@ if($flag_dati){
 $d= mysqli_query($connessione, "SELECT * FROM RaccoltaDati INNER JOIN  Sensore ON Fk_Sensore = Id_Sensore
 								INNER JOIN Utenti ON Fk_Utente = IdUtente WHERE IdUtente = '".$idutente."' ");
 
-echo"<tr>";
-echo"<th class='th'>CODICE SENSORE</th>";
-echo"<th class='th'>DATA RILEVAZIONE</th>";
-echo"<th class='th'>RILEVAZIONE</th>";
-echo"<th class='th'>DETTAGLI</th>";
-
-echo"</tr>";
+$tr = "<tr>"; 
+        echo $tr; 
+	$h1 = "<th class='th'>CODICE SENSORE</th>";
+echo $h1;
+$h2 = "<th class='th'>DATA RILEVAZIONE</th>";
+echo $h2;
+$h3 = "<th class='th'>RILEVAZIONE</th>";
+echo $h3;
+$h4 = "<th class='th'>DETTAGLI</th>";
+echo $h4;
+$rt = "</tr>"; 
+        echo $rt;
 
 }
 while ($row = mysqli_fetch_assoc($d)) {
-		echo"<tr>";
+		$tr = "<tr>";
+		echo $tr;
 		$r1 = "<td class='td'> ". $row['Fk_Sensore']."</td> ";
 		$r2 = "<td class='td'> ". $row['Data']." </td>";
 		$r3 = "<td class='td'> ". $row['Rilevazione']." </td>";
@@ -263,7 +279,8 @@ while ($row = mysqli_fetch_assoc($d)) {
        echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
         echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
         echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
-        echo "</tr>";
+        $rt = "</tr>"; 
+        echo $rt;
         }
 
 ?>
