@@ -67,10 +67,11 @@ echo '<script> alert("Questo utente ha già un sensore con la stessa marca e tip
 
 //non esiste
 else{
-$queryInserisci = "INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
-						VALUES('$fkutente','$m2','$t2') " ;
-                        
-$risultatoInserimento = mysqli_query($connessione, $queryInserisci);  
+$queryInserisci = mysqli_prepare($connesione, "INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
+						VALUES('?','?','?') " );
+	mysqli_stmt_bind_param($queryInserisci, 'iss', $fkutente, $m2, $t2);
+        mysqli_stmt_execute ($queryInserisci);
+	
 }
 
 if($risultatoInserimento){
@@ -94,14 +95,16 @@ $fksensore = $_POST['Fk_Sensore'];
 
 
 
-$controlloSensore = "SELECT Id_Sensore FROM Sensore WHERE Id_Sensore = '".$fksensore."' ";
-$risultatoSensore = mysqli_query($connessione, $controlloSensore);
+$controlloSensore = mysqli_prepare($connessione, "SELECT Id_Sensore FROM Sensore WHERE Id_Sensore = ? ");
+	mysqli_stmt_bind_param($controlloSensore, "i", $fksensore);
+	mysqli_stmt_execute($controlloSensore);
 
 //sensore esistente, quindi elimino.
 if(mysqli_num_rows($risultatoSensore)>0){
 
-$queryElimina = "DELETE FROM Sensore WHERE Id_Sensore = '".$fksensore."'  ";                        
-$risultatoEliminazione = mysqli_query($connessione, $queryElimina);  
+$queryElimina = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Id_Sensore = '?'  ");                        
+	mysqli_stmt_bind_param($queryElimina, "i", $fksensore);
+	mysqli_stmt_execute($queryElimina);
 
 
 
@@ -131,17 +134,22 @@ $idutente = $_POST['Id_Utente'];
 
 
 
-$controlloUtente = "SELECT IdUtente FROM Utenti WHERE IdUtente = '".$idutente."' ";
-$risultatoUtente = mysqli_query($connessione, $controlloUtente);
+$controlloUtente = mysqli_prepare($connessione, "SELECT IdUtente FROM Utenti WHERE IdUtente = ? ");                      
+	mysqli_stmt_bind_param($controlloUtente, "i", $idutente);
+	mysqli_stmt_execute($controlloUtente);
 
-//sensore esistente, quindi elimino.
+
+//utente esistente, quindi elimino.
 if(mysqli_num_rows($risultatoUtente)>0){
 
-$queryElimina = "DELETE FROM Utenti WHERE IdUtente = '".$idutente."'  ";                        
-$risultatoEliminazione = mysqli_query($connessione, $queryElimina);  
+$queryElimina = mysqli_prepare($connessione, "DELETE FROM Utenti WHERE IdUtente = ?  ");                                             
+	mysqli_stmt_bind_param($queryElimina, "i", $idutente);
+	mysqli_stmt_execute($queryElimina);
 
-$queryEliminaS = "DELETE FROM Sensore WHERE Fk_Utente = '".$idutente."'  ";                        
-$risultatoEliminazioneS = mysqli_query($connessione, $queryEliminaS);
+$queryEliminaS = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Fk_Utente = ?  ");                        
+	mysqli_stmt_bind_param($queryEliminaS, "i", $idutente);
+	mysqli_stmt_execute($queryEliminaS);
+
 
 if($risultatoEliminazione){
 echo '<script> alert("Utente eliminato correttamente");</script>';
