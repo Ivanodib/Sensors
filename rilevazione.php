@@ -23,7 +23,7 @@ $inserisciRiv = mysqli_prepare($connessione, "INSERT INTO RaccoltaDati (Fk_Senso
  mysqli_stmt_bind_param($inserisciRiv, "isss", $Fk_Sensore, NOW(), $Rilevazione, $Dettagli);
 	mysqli_stmt_execute($InserisciRiv);             
 
-if($risultatoInserimento){
+if(isset($risultatoInserimento)){
 	$r1 = '<script> alert("Inserimento riuscito") </script>';
 echo $r1;
 }
