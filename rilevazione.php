@@ -24,10 +24,12 @@ $inserisciRiv = mysqli_prepare($connessione, "INSERT INTO RaccoltaDati (Fk_Senso
 	mysqli_stmt_execute($InserisciRiv);             
 
 if($risultatoInserimento){
-echo '<script> alert("Inserimento riuscito") </script>';
+	$r1 = '<script> alert("Inserimento riuscito") </script>';
+echo $r1;
 }
 else{
-echo '<script> alert("Errore di rete") </script>';
+	$r1 = '<script> alert("Errore di rete") </script>';
+echo $r1;
 }
 }
 ?>
