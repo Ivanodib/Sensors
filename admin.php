@@ -30,10 +30,35 @@ $m2 = aggiungiZeri($marca);
 
 $t2 = aggiungiZeri($tipologia);
 
+	/*
+	
+	$stmt = mysqli_prepare($link, "INSERT INTO CountryLanguage VALUES (?, ?, ?, ?)");
+mysqli_stmt_bind_param($stmt, 'sssd', $code, $language, $official, $percent);
 
-$controlloSensore = "SELECT Id_Sensore FROM Sensore WHERE Marca = '".$m2."'  AND Tipologia = '".$t2."' 
+$code = 'DEU';
+$language = 'Bavarian';
+$official = "F";
+$percent = 11.2;
+
+mysqli_stmt_execute($stmt);
+	
+	*/
+
+//originale
+/*$controlloSensore = "SELECT Id_Sensore FROM Sensore WHERE Marca = '".$m2."'  AND Tipologia = '".$t2."' 
 						AND Fk_Utente = '".$fkutente."'  ";
-$risultatoSensore = mysqli_query($connessione, $controlloSensore);
+$risultatoSensore = mysqli_query($connessione, $controlloSensore);*/
+	
+	//modificato
+	
+	
+	$controlloSensore = mysqli_prepare($connessione,"SELECT Id_Sensore FROM Sensore WHERE Marca = ?  AND Tipologia = ? 
+						AND Fk_Utente = ? ");						
+		mysqli_stmt_bind_param($controlloSensore, 'ssi', $m2, $t2, $fkutente);						
+mysqli_stmt_execute ($controlloSensore);
+	
+
+	
 
 //esiste
 if(mysqli_num_rows($risultatoSensore)>0){
