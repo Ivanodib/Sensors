@@ -27,7 +27,7 @@ $tipologia = $_POST['Tipologia'];
 $fkutente = $_POST['Fk_Utente'];
 
 $m2 = aggiungiZeri($marca);
-
+//cc
 $t2 = aggiungiZeri($tipologia);
 
 	/*
