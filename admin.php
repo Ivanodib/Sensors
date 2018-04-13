@@ -62,7 +62,8 @@ mysqli_stmt_execute ($controlloSensore);
 
 //esiste
 if(mysqli_num_rows($risultatoSensore)>0){
-echo '<script> alert("Questo utente ha già un sensore con la stessa marca e tipologia");</script>';
+	$r1 = '<script> alert("Questo utente ha già un sensore con la stessa marca e tipologia");</script>';
+echo $r1;
 }
 
 //non esiste
