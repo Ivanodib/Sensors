@@ -175,7 +175,8 @@ $checkbox = mysql_query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS
 while($row = mysql_fetch_assoc($checkbox)){
 
 $temp = $row['COLUMN_NAME'];
- echo $temp."      "."<input type='checkbox' name='test$temp' value = '$temp'><br>";
+	$stringa = $temp."      "."<input type='checkbox' name='test$temp' value = '$temp'><br>";
+ echo $stringa;
  
 /*echo" <div class='checkbox-inline'>
   <label><input type='checkbox' value='$temp' name'test$temp'>$temp</label>
@@ -215,8 +216,10 @@ echo"</tr>";
 }
 while ($row = mysqli_fetch_assoc($vis)) {
 		echo"<tr>";
-        echo "<td class='td'> ". $row['Codice']."</td> ";
-        echo "<td class='td'> ". $row['Nome']." </td>";
+	$r1 = "<td class='td'> ". $row['Codice']."</td> ";
+	$r2 = "<td class='td'> ". $row['Nome']." </td>";
+        echo $r1;
+        echo $r2;
         echo "</tr>";
         }
 
@@ -244,10 +247,14 @@ echo"</tr>";
 }
 while ($row = mysqli_fetch_assoc($d)) {
 		echo"<tr>";
-        echo "<td class='td'> ". $row['Fk_Sensore']."</td> ";
-        echo "<td class='td'> ". $row['Data']." </td>";
-        echo "<td class='td'> ". $row['Rilevazione']." </td>";
-        echo "<td class='td'> ". $row['Dettagli']." </td>";
+		$r1 = "<td class='td'> ". $row['Fk_Sensore']."</td> ";
+		$r2 = "<td class='td'> ". $row['Data']." </td>";
+		$r3 = "<td class='td'> ". $row['Rilevazione']." </td>";
+		$r4 = "<td class='td'> ". $row['Dettagli']." </td>";
+        echo $r1;
+        echo $r2;
+        echo $r3;
+        echo $r4;
         echo "</tr>";
         }
 
@@ -272,4 +279,4 @@ while ($row = mysqli_fetch_assoc($d)) {
 </div>
 </div>
 </body>
-</html>
+</html>
