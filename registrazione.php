@@ -48,7 +48,7 @@ if(isset($risultatoInserimento)){
 	$r1 = "<script> alert( 'Registrazione riuscita'); </script>";
 echo $r1;
 		
-if($flag==1)){
+if($flag==1){
 	
 header('location :admin.php');
 	
