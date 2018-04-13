@@ -23,8 +23,10 @@ $emailutente = $_POST['EmailUtente'];
 $passwordutente = $_POST['PasswordUtente'];
 
 
-$controlloEmail = "SELECT IdUtente FROM Utenti WHERE EmailUtente = '".$emailutente."'   ";
-$risultatoEmail = mysqli_query($connessione, $controlloEmail);
+$controlloEmail = mysqli_prepare($connessione, "SELECT IdUtente FROM Utenti WHERE EmailUtente = ? ");
+	mysqli_stmt_bind_param($controlloEmail, "s", $emailutente);
+	mysqli_stmt_execute($controlloEmail);
+
 
 
 if(mysqli_num_rows($risultatoEmail)>0){
@@ -33,10 +35,12 @@ echo"<script> alert( 'Email esistente'); </script>";
 else{
 //se email non esiste inserisco i dati
 
-$queryInserisci = "INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
-						VALUES('$nomeutente','$cognomeutente','$emailutente','$passwordutente') " ;
-                        
-$risultatoInserimento = mysqli_query($connessione, $queryInserisci);  
+$queryInserisci = mysqli_prepare($connessione, "INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
+						VALUES('?','?','?','?') ");
+	
+	 mysqli_stmt_bind_param($queryInserisci, "ssss", $nomeutente, $cognomeutente, $emailutente, $passwordutente);
+	mysqli_stmt_execute($queryInserisci);
+ 
 
 if($risultatoInserimento){
 echo"<script> alert( 'Registrazione riuscita'); </script>";
