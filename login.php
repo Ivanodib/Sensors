@@ -8,10 +8,11 @@ $emailutente = $_POST['EmailUtente'];
 $passwordutente = $_POST['PasswordUtente'];
 
 
-$controlloLogin ="SELECT * FROM Utenti WHERE EmailUtente = '".$emailutente."'
-												AND PasswordUtente = '".$passwordutente."' ";
-$risultatoEmail = mysqli_query($connessione, $controlloLogin);
-
+$controlloLogin = mysqli_prepare($connessione, "SELECT * FROM Utenti WHERE EmailUtente = ?
+				AND PasswordUtente = ? ");
+	mysqli_stmt_bind_param($controlloLogin, "ss",$emailutente, $passwordutente);
+	mysqli_stmt_execute($controlloLogin);
+	
 
 if(mysqli_num_rows($risultatoEmail)>0){
 
@@ -53,8 +54,9 @@ if(isset($_POST['LoginApp']) && isset($_POST['Codice'])){
 
 $cod = $_POST['Codice'];
 
-$controlloLoginApp ="SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$cod."'  ";
-$risultatoApp = mysqli_query($connessione, $controlloLoginApp);
+$controlloLoginApp =mysqli_prepare($connessione, "SELECT * FROM ApplicazioneEsterna WHERE Codice = ?  ");
+	mysqli_stmt_bind_param($controlloLoginApp, "i", $cod);
+mysqli_stmt_execute($controlloLoginApp);
 
 
 if(mysqli_num_rows($risultatoApp)>0){
