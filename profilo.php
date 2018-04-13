@@ -35,7 +35,7 @@ $elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Co
 	mysqli_stmt_bind_param($elimina, "i", $idapp);
 	mysqli_stmt_execute($elimina);
 
-if($elimina) echo"<script> alert( 'Applicazione esterna rimossa'); </script>";
+if($elimina) echo $r1="<script> alert( 'Applicazione esterna rimossa'); </script>";
 else {echo"<script> alert( 'Errore di rete durante la cancellazione'); </script>"; }
 }
 
