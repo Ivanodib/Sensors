@@ -205,10 +205,16 @@ echo"</tr>";
 }
 while ($row = mysqli_fetch_assoc($vis)) {
 		echo"<tr>";
-        echo "<td class='td'> ". $row['Id_Sensore']."</td> ";
-        echo "<td class='td'> ". $row['Fk_Utente']." </td>";
-         echo "<td class='td'> ". $row['Marca']." </td>";
-          echo "<td class='td'> ". $row['Tipologia']." </td>";
+	$r1 = "<td class='td'> ". $row['Id_Sensore']."</td> ";
+	$r2 = "<td class='td'> ". $row['Fk_Utente']." </td>";
+	$r3 = "<td class='td'> ". $row['Marca']." </td>";
+	$r4 =  "<td class='td'> ". $row['Tipologia']." </td>";
+        echo $r1;
+        echo $r2;
+	echo $r3;
+	echo $r4;
+         
+          
         echo "</tr>";
         }
 
@@ -281,4 +287,4 @@ while ($row = mysqli_fetch_assoc($vis)) {
 
 
 </body>
-</html>
+</html>
