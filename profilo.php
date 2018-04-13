@@ -183,7 +183,7 @@ while($row = mysql_fetch_assoc($checkbox)){
 
 $temp = $row['COLUMN_NAME'];
 	$stringa = $temp."      "."<input type='checkbox' name='test$temp' value = '$temp'><br>";
- echo $stringa;
+  echo htmlspecialchars($stringa, ENT_QUOTES, 'UTF-8');
  
 /*echo" <div class='checkbox-inline'>
   <label><input type='checkbox' value='$temp' name'test$temp'>$temp</label>
@@ -225,8 +225,9 @@ while ($row = mysqli_fetch_assoc($vis)) {
 		echo"<tr>";
 	$r1 = "<td class='td'> ". $row['Codice']."</td> ";
 	$r2 = "<td class='td'> ". $row['Nome']." </td>";
-        echo $r1;
-        echo $r2;
+	
+        echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
+        echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
         echo "</tr>";
         }
 
@@ -258,10 +259,10 @@ while ($row = mysqli_fetch_assoc($d)) {
 		$r2 = "<td class='td'> ". $row['Data']." </td>";
 		$r3 = "<td class='td'> ". $row['Rilevazione']." </td>";
 		$r4 = "<td class='td'> ". $row['Dettagli']." </td>";
-        echo $r1;
-        echo $r2;
-        echo $r3;
-        echo $r4;
+        echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
+       echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
+        echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
+        echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
         echo "</tr>";
         }
 
