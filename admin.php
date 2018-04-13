@@ -238,10 +238,10 @@ echo"</tr>";
 }
 while ($row = mysqli_fetch_assoc($vis)) {
 		echo"<tr>";
-	$r1 = "<td class='td'> ". $row['Id_Sensore']."</td> ";
-	$r2 = "<td class='td'> ". $row['Fk_Utente']." </td>";
-	$r3 = "<td class='td'> ". $row['Marca']." </td>";
-	$r4 =  "<td class='td'> ". $row['Tipologia']." </td>";
+	$r1 = "&lt td class='td'&gt ". $row['Id_Sensore']."&lt /td &gt ";
+	$r2 = "&lt td class='td'&gt ". $row['Fk_Utente']."  &lt /td &gt";
+	$r3 = "&lt td class='td'&gt ". $row['Marca']." &lt /td &gt";
+	$r4 =  "&lt td class='td'&gt ". $row['Tipologia']." &lt /td &gt";
         echo $r1;
         echo $r2;
 	echo $r3;
@@ -301,10 +301,10 @@ echo"</tr>";
 }
 while ($row = mysqli_fetch_assoc($vis)) {
 		echo"<tr>";
-	$r1 = "<td class='td'> ". $row['IdUtente']."</td> ";
-	$r2 = "<td class='td'> ". $row['NomeUtente']." </td>";
-	$r3 = "<td class='td'> ". $row['EmailUtente']." </td>";
-	$r4 = "<td class='td'> ". $row['PasswordUtente']." </td>";
+	$r1 = "&lt td class='td'&gt ". $row['IdUtente']."</td &gt ";
+	$r2 = " &lt td class='td'&gt ". $row['NomeUtente']." &lt /td &gt";
+	$r3 = "&lt td class='td'&gt ". $row['EmailUtente']." &lt /td &gt";
+	$r4 = "&lt td class='td'&gt ". $row['PasswordUtente']." &lt /td &gt";
         echo $r1;
         echo $r2;
          echo $r3;
