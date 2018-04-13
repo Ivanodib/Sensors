@@ -17,10 +17,11 @@ echo $stringaSplitted;
 
 
 
-$inserisciRiv ="INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
-				VALUES ('$Fk_Sensore',NOW(),'$Rilevazione', '$Dettagli') ";
+$inserisciRiv = mysqli_prepare($connessione, "INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
+				VALUES ('?','?','?','?') ");
                 
-  $risultatoInserimento = mysqli_query($connessione, $inserisciRiv);              
+ mysqli_stmt_bind_param($inserisciRiv, "isss", $Fk_Sensore, NOW(), $Rilevazione, $Dettagli);
+	mysqli_stmt_execute($InserisciRiv);             
 
 if($risultatoInserimento){
 echo '<script> alert("Inserimento riuscito") </script>';
