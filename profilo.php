@@ -182,7 +182,7 @@ dettagli <input type='checkbox'  name='testDettagli' value = 'Dettagli'><br>
 marca <input type='checkbox'  name='testMarca' value = 'Marca'><br>
 tipo <input type='checkbox'  name='testTipologia' value = 'Tipologia'><br>
 !-->
-<?
+<?php
 
 
 $checkbox = mysql_query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%' AND COLUMN_NAME NOT LIKE 'Fk_%'"); 
