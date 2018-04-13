@@ -22,9 +22,14 @@ $row = mysqli_fetch_array($risultatoEmail,MYSQLI_ASSOC);
 
 
 //login
+	if(isset($row['NomeUtente'])){
 $_SESSION['NomeUtente'] = $row['NomeUtente'];
+	}
+	if(isset($row['IdUtente'])){
 $_SESSION['id'] = $row['IdUtente'];
-
+	}
+	
+	
 //se c'è il cognome vai in admin
 if(  $row['CognomeUtente']!=0 || $row['CognomeUtente']!= '0'   ){
 header('location: admin.php');
