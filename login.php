@@ -45,7 +45,8 @@ header('location: profilo.php');
     
 //se sono errati visualizza il messaggio di errore    
     else{
-echo '<script> alert("Email o password errati");</script>';
+	    $r1 = '<script> alert("Email o password errati");</script>';
+echo $r1;
 
     
     }
@@ -74,8 +75,9 @@ header('location: App_Loggata.php');
 }
 
 else{
-echo '<script> alert("Applicazione esterna non esistente");</script>';
+	$r1 = '<script> alert("Applicazione esterna non esistente");</script>';
 
+echo $r1;
 }
 }
 
