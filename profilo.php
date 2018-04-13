@@ -36,7 +36,7 @@ $elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Co
 	mysqli_stmt_execute($elimina);
 
 if( isset($elimina)) {
-	if($elimina){
+	if($elimina==1){
 	$r1="<script> alert( 'Applicazione esterna rimossa'); </script>";
 	echo $r1;  
 	}
@@ -222,7 +222,7 @@ global $flag_vis;
 global $idutente;
 if(isset($flag_vis)){
 
-	if($flag_vis){
+	if($flag_vis==1){
 $vis= mysqli_query($connessione, "SELECT * FROM ApplicazioneEsterna WHERE Fk_Utente = '".$idutente."' ");
 
 echo"<tr>";
@@ -255,7 +255,7 @@ global $flag_dati;
 global $idutente;
 if(isset($flag_dati)){
 
-	if($flag_dati){
+	if($flag_dati==1){
 $d= mysqli_query($connessione, "SELECT * FROM RaccoltaDati INNER JOIN  Sensore ON Fk_Sensore = Id_Sensore
 								INNER JOIN Utenti ON Fk_Utente = IdUtente WHERE IdUtente = '".$idutente."' ");
 
