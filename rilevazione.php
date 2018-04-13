@@ -9,8 +9,9 @@ $Fk_Sensore = substr($stringa, 0, 10);
 $Data = substr($stringa, 10, 19); 
 $Rilevazione = substr($stringa, 29, 3);
 $Dettagli = substr($stringa, 33, 50);
+$stringaSplitted = " $Fk_Sensore, $Data, $Rilevazione, $Dettagli ";	
 
-echo " $Fk_Sensore, $Data, $Rilevazione, $Dettagli ";
+echo $stringaSplitted;
 //"00000000092018-03-17 12:39:4429°RilevazioneSenzaErrori"
 
 
