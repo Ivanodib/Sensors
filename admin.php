@@ -291,7 +291,7 @@ while ($row = mysqli_fetch_assoc($vis)) {
 <input type="submit" class="btn btn-default" value="Visualizza clienti" name="VisualizzaUtenti">
 <table class="table">
 
-<?php
+<?php 
 global $flag_uten;
 
 
