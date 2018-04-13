@@ -44,14 +44,14 @@ $queryInserisci = mysqli_prepare($connessione, "INSERT INTO Utenti (NomeUtente, 
  
 
 if(isset($risultatoInserimento)){
-	if($risultatoInserimento){
+	
 	$r1 = "<script> alert( 'Registrazione riuscita'); </script>";
 echo $r1;
 		
-if(isset($flag)){
-	if($flag){
+if($flag==1)){
+	
 header('location :admin.php');
-	}
+	
 }
 else{
 header('location :login.php');
@@ -64,7 +64,7 @@ echo $r1;
 }
 
 }
-}
+
 
 ?>
 
