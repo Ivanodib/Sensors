@@ -76,11 +76,12 @@ $queryInserisci = mysqli_prepare($connesione, "INSERT INTO Sensore (Fk_Utente, M
 }
 
 if($risultatoInserimento){
-echo '<script> alert("Sensore inserito correttamente");</script>';
+	$r1 = '<script> alert("Sensore inserito correttamente");</script>';
+echo $r1;
 }
 else{
-echo '<script> alert("Errore di rete");</script>';
-
+	$r2 = '<script> alert("Errore di rete");</script>';
+echo $r2;
 }
 
 
@@ -110,15 +111,18 @@ $queryElimina = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Id_Senso
 
 
 if($risultatoEliminazione){
-echo '<script> alert("Sensore eliminato correttamente");</script>';
+	$r1 = '<script> alert("Sensore eliminato correttamente");</script>';
+echo $r1;
 }
 else{
-echo '<script> alert("Errore di rete");</script>';
+	$r2 = '<script> alert("Errore di rete");</script>';
+echo $r2;
 
 }
 }
 else {
-echo '<script> alert("Sensore inesistente");</script>';
+	$r3 = '<script> alert("Sensore inesistente");</script>';
+echo $r3;
 
 }
 
@@ -153,15 +157,18 @@ $queryEliminaS = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Fk_Uten
 
 
 if($risultatoEliminazione){
-echo '<script> alert("Utente eliminato correttamente");</script>';
+	$r1 = '<script> alert("Utente eliminato correttamente");</script>';
+echo $1;
 }
 else{
-echo '<script> alert("Errore di rete");</script>';
+	$r2 = '<script> alert("Errore di rete");</script>';
+echo $r2;
 
 }
 }
 else {
-echo '<script> alert("Utente inesistente");</script>';
+	$r3 = '<script> alert("Utente inesistente");</script>';
+echo $r3;
 
 }
 
