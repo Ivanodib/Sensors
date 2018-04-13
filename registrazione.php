@@ -30,7 +30,8 @@ $controlloEmail = mysqli_prepare($connessione, "SELECT IdUtente FROM Utenti WHER
 
 
 if(mysqli_num_rows($risultatoEmail)>0){
-echo"<script> alert( 'Email esistente'); </script>";
+	$r1 = "<script> alert( 'Email esistente'); </script>";
+echo $r1;
 }
 else{
 //se email non esiste inserisco i dati
@@ -43,7 +44,8 @@ $queryInserisci = mysqli_prepare($connessione, "INSERT INTO Utenti (NomeUtente, 
  
 
 if($risultatoInserimento){
-echo"<script> alert( 'Registrazione riuscita'); </script>";
+	$r1 = "<script> alert( 'Registrazione riuscita'); </script>";
+echo $r1;
 if($flag){
 header('location :admin.php');
 }
@@ -52,7 +54,8 @@ header('location :login.php');
 }
 }
 else{
-echo"<script> alert( 'Registrazione fallita'); </script>";
+	$r1 = "<script> alert( 'Registrazione fallita'); </script>";
+echo $r1;
 }
 
 
