@@ -11,7 +11,7 @@ $nomeutente = $_POST['NomeUtente'];
 
 
 
-if(  $_POST['CognomeUtente'] ==" " || $_POST['CognomeUtente'] ==""  ){
+if(  $_POST['CognomeUtente'] ==' ' || $_POST['CognomeUtente'] ==' '  ){
 $cognomeutente = 0;
 }
 else{
@@ -23,8 +23,8 @@ $emailutente = $_POST['EmailUtente'];
 $passwordutente = $_POST['PasswordUtente'];
 
 
-$controlloEmail = mysqli_prepare($connessione, "SELECT IdUtente FROM Utenti WHERE EmailUtente = ? ");
-	mysqli_stmt_bind_param($controlloEmail, "s", $emailutente);
+$controlloEmail = mysqli_prepare($connessione, 'SELECT IdUtente FROM Utenti WHERE EmailUtente = ? ');
+	mysqli_stmt_bind_param($controlloEmail, 's', $emailutente);
 	mysqli_stmt_execute($controlloEmail);
 
 
@@ -36,10 +36,10 @@ echo $r1;
 else{
 //se email non esiste inserisco i dati
 
-$queryInserisci = mysqli_prepare($connessione, "INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
-						VALUES('?','?','?','?') ");
+$queryInserisci = mysqli_prepare($connessione, 'INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
+						VALUES('?','?','?','?') ');
 	
-	 mysqli_stmt_bind_param($queryInserisci, "ssss", $nomeutente, $cognomeutente, $emailutente, $passwordutente);
+	 mysqli_stmt_bind_param($queryInserisci, 'ssss', $nomeutente, $cognomeutente, $emailutente, $passwordutente);
 	mysqli_stmt_execute($queryInserisci);
  
 
