@@ -311,14 +311,20 @@ global $flag_uten;
 
 if($flag_uten){
 $vis= mysqli_query($connessione, "SELECT * FROM Utenti WHERE CognomeUtente = '0' ");
-
-echo"<tr>";
-echo"<th class='th'>CODICE CLIENTE</th>";
-echo"<th class='th'>NOME CLIENTE</th>";
-echo"<th class='th'>EMAIL</th>";
-echo"<th class='th'>PASSWORD</th>";
-
-echo"</tr>";
+	
+$r1 ='<tr>';
+$r2 ="<th class='th'>CODICE CLIENTE</th>";
+$r3 ="<th class='th'>NOME CLIENTE</th>";
+$r4= "<th class='th'>EMAIL</th>";
+$r5="<th class='th'>PASSWORD</th>";
+$r6 = '</tr>';
+	
+	echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
+         echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
+       echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
+         echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
+          echo htmlspecialchars($r5, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r6, ENT_QUOTES, 'UTF-8');
 
 }
 while ($row = mysqli_fetch_assoc($vis)) {
