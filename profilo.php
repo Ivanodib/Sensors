@@ -225,9 +225,12 @@ if(isset($flag_vis)){
 	if($flag_vis==1){
 $vis= mysqli_query($connessione, "SELECT * FROM ApplicazioneEsterna WHERE Fk_Utente = '".$idutente."' ");
 
-echo"<tr>";
-echo"<th class='th'>CODICE</th>";
-echo"<th class='th'>NOME APPLICAZIONE</th>";
+	$r1 = 	"<tr>";
+	$r2 = 	"<th class='th'>CODICE</th>";
+		$r3 = "<th class='th'>NOME APPLICAZIONE</th>";
+echo $r1;
+echo $r2;
+echo $r3;
 
 echo"</tr>";
 
