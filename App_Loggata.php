@@ -5,7 +5,7 @@ $codice = $_SESSION['idapp'];
 
 
 
-$numerorighe = mysqli_query($connessione,"SELECT * FROM Trasferimento");
+$numerorighe = mysqli_query($connessione,'SELECT * FROM Trasferimento');
 $num = mysqli_num_rows($numerorighe);
 
 if(!isset($_SESSION['prec'])){
@@ -17,22 +17,22 @@ $_SESSION['prec'] = $n;
  //} //CANCELLA 
 
 //BLOCCO PER AVERE LE PREFERENZE
-$sql = mysqli_query($connessione,"SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$codice."' ");
+$sql = mysqli_query($connessione,'SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$codice."' ');
 
 $row = mysqli_fetch_assoc($sql);
-$nomefile = "Rilevazioni.csv";
+$nomefile = 'Rilevazioni.csv';
 $datiRilevazione = $row['Dati_trasferiti'];
 
 
 //BLOCCO PER CREARE I CAMPI NELLA SELECT DEI DATI 
 $query;
-$result = mysqli_query($connessione, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
- AND COLUMN_NAME NOT LIKE 'Fk_%'") ;
+$result = mysqli_query($connessione, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
+ AND COLUMN_NAME NOT LIKE '".Fk_%."' ') ;
 $i=0;
 
     while ($row = mysqli_fetch_assoc($result)) {
     $campo = $row['COLUMN_NAME'];
-    if($datiRilevazione[$i] == "1"){
+    if($datiRilevazione[$i] == '1'){
 	    $query = $query.$row['COLUMN_NAME'].",";
       
     }
@@ -44,22 +44,23 @@ $i++;
  $query=substr($query, 0, -1);
 	
 
-  $querytot = "SELECT ".mysql_real_escape_string($query)." FROM Sensore
+  $querytot = "SELECT ".mysql_real_escape_string($query).' FROM Sensore
 							INNER JOIN RaccoltaDati ON `RaccoltaDati`.`Fk_Sensore` = `Sensore`.`Id_Sensore`
                             INNER JOIN Utenti ON `Sensore`.`Fk_Utente` = `Utenti`.`IdUtente`
 							INNER JOIN ApplicazioneEsterna ON `Utenti`.`IdUtente` = `ApplicazioneEsterna`.`Fk_Utente`
-                            WHERE `ApplicazioneEsterna`.`Codice` = ".mysql_real_escape_string($codice)."";
+                            WHERE `ApplicazioneEsterna`.`Codice` = ".mysql_real_escape_string($codice)."' ;
                             
                            
 //QUERY PER AVERE I DATI
 $totale = mysqli_query($connessione, $querytot);
 
-$file = fopen( $nomefile , "w");
+$file = fopen( $nomefile , 'w');
 
 
 while($rigafile = mysqli_fetch_assoc($totale)){
+	$str = $rigafile = chr(0xEF) . chr(0xBB) . chr(0xBF);
 
-	fputcsv($file, $rigafile = chr(0xEF) . chr(0xBB) . chr(0xBF));
+	fputcsv($file,$str );
   }
   
 fclose($file);
