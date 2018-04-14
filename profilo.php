@@ -84,7 +84,7 @@ $i++;
 $codice = rand(1,1000000000);
 $r1 = "<script> alert( 'CODICE APPLICAZIONE ESTERNA: $codice'); </script>";
 	echo $r1;
-$stmt =  mysqli_prepare($connessione,"INSERT INTO ApplicazioneEsterna (Fk_Utente,Codice,Nome,Dati_trasferiti) 
+//$stmt =  mysqli_prepare($connessione,"INSERT INTO ApplicazioneEsterna (Fk_Utente,Codice,Nome,Dati_trasferiti) 
 			values ('?','?','?','?' )" );
 	mysqli_stmt_bind_param($stmt, "isss", $idutente, $codice, $nome, $stringa);
 	mysqli_stmt_execute($stmt);
