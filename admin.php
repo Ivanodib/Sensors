@@ -1,12 +1,12 @@
 <?php
-include "connessione.php";
+include 'connessione.php';
 session_start();
 
 $flag_sens =0;
 $flag_uten =0;
 
 function aggiungiZeri($marcaTipo){
-return  str_pad($marcaTipo, 20, "0", STR_PAD_LEFT); 
+return  str_pad($marcaTipo, 20, '0', STR_PAD_LEFT); 
 }
 
 if(isset($_POST['VisualizzaSensori'])){
@@ -52,8 +52,8 @@ $risultatoSensore = mysqli_query($connessione, $controlloSensore);*/
 	//modificato
 	
 	
-	$controlloSensore = mysqli_prepare($connessione,"SELECT Id_Sensore FROM Sensore WHERE Marca = ?  AND Tipologia = ? 
-						AND Fk_Utente = ? ");						
+	$controlloSensore = mysqli_prepare($connessione,'SELECT Id_Sensore FROM Sensore WHERE Marca = ?  AND Tipologia = ? 
+						AND Fk_Utente = ? ');						
 		mysqli_stmt_bind_param($controlloSensore, 'ssi', $m2, $t2, $fkutente);						
 mysqli_stmt_execute ($controlloSensore);
 	
@@ -68,8 +68,8 @@ echo $r1;
 
 //non esiste
 else{
-$queryInserisci = mysqli_prepare($connesione, "INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
-						VALUES('?','?','?') " );
+$queryInserisci = mysqli_prepare($connesione, 'INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
+						VALUES(?,?,?,?) ' );
 	mysqli_stmt_bind_param($queryInserisci, 'iss', $fkutente, $m2, $t2);
         mysqli_stmt_execute ($queryInserisci);
 	
@@ -97,15 +97,15 @@ $fksensore = $_POST['Fk_Sensore'];
 
 
 
-$controlloSensore = mysqli_prepare($connessione, "SELECT Id_Sensore FROM Sensore WHERE Id_Sensore = ? ");
-	mysqli_stmt_bind_param($controlloSensore, "i", $fksensore);
+$controlloSensore = mysqli_prepare($connessione, 'SELECT Id_Sensore FROM Sensore WHERE Id_Sensore = ? ');
+	mysqli_stmt_bind_param($controlloSensore, 'i', $fksensore);
 	mysqli_stmt_execute($controlloSensore);
 
 //sensore esistente, quindi elimino.
 if(mysqli_num_rows($risultatoSensore)>0){
 
-$queryElimina = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Id_Sensore = '?'  ");                        
-	mysqli_stmt_bind_param($queryElimina, "i", $fksensore);
+$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Sensore WHERE Id_Sensore = ?  ');                        
+	mysqli_stmt_bind_param($queryElimina, 'i', $fksensore);
 	mysqli_stmt_execute($queryElimina);
 
 
@@ -139,32 +139,32 @@ $idutente = $_POST['Id_Utente'];
 
 
 
-$controlloUtente = mysqli_prepare($connessione, "SELECT IdUtente FROM Utenti WHERE IdUtente = ? ");                      
-	mysqli_stmt_bind_param($controlloUtente, "i", $idutente);
+$controlloUtente = mysqli_prepare($connessione, 'SELECT IdUtente FROM Utenti WHERE IdUtente = ? ');                      
+	mysqli_stmt_bind_param($controlloUtente, 'i', $idutente);
 	mysqli_stmt_execute($controlloUtente);
 
 
 //utente esistente, quindi elimino.
 if(mysqli_num_rows($risultatoUtente)>0){
 
-$queryElimina = mysqli_prepare($connessione, "DELETE FROM Utenti WHERE IdUtente = ?  ");                                             
-	mysqli_stmt_bind_param($queryElimina, "i", $idutente);
+$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Utenti WHERE IdUtente = ?  ');                                             
+	mysqli_stmt_bind_param($queryElimina, 'i', $idutente);
 	mysqli_stmt_execute($queryElimina);
 
-$queryEliminaS = mysqli_prepare($connessione, "DELETE FROM Sensore WHERE Fk_Utente = ?  ");                        
-	mysqli_stmt_bind_param($queryEliminaS, "i", $idutente);
+$queryEliminaS = mysqli_prepare($connessione, 'DELETE FROM Sensore WHERE Fk_Utente = ?  ');                        
+	mysqli_stmt_bind_param($queryEliminaS, 'i', $idutente);
 	mysqli_stmt_execute($queryEliminaS);
 
 
 if($risultatoEliminazione){
 	$r1 = '<script> alert("Utente eliminato correttamente");</script>';
-echo $1;
+echo $r1;
 }
 else{
 	$r2 = '<script> alert("Errore di rete");</script>';
 echo $r2;
 
-
+}
 }
 else {
 	$r3 = '<script> alert("Utente inesistente");</script>';
@@ -233,30 +233,44 @@ global $flag_sens;
 global $idutente;
 
 if($flag_sens){
-$vis= mysqli_query($connessione, "SELECT * FROM Sensore ORDER BY Fk_Utente ");
+$vis= mysqli_query($connessione, 'SELECT * FROM Sensore ORDER BY Fk_Utente ');
 
-echo"<tr>";
-echo"<th class='th'>CODICE SENSORE</th>";
-echo"<th class='th'>CODICE UTENTE</th>";
-echo"<th class='th'>MARCA</th>";
-echo"<th class='th'>TIPOLOGIA</th>";
+$r1 = '<tr>';
+$r2 = '<th class='th'>CODICE SENSORE</th>';
+$r3 = '<th class='th'>CODICE UTENTE</th>';
+$r4 = '<th class='th'>MARCA</th>';
+$r5 = '<th class='th'>TIPOLOGIA</th>';
 
-echo"</tr>";
+$r6 = '</tr>';
+	
+	echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
+        echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r5, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r6, ENT_QUOTES, 'UTF-8');
+	
+	
 
 }
 while ($row = mysqli_fetch_assoc($vis)) {
-		echo"<tr>";
+	$r0 = '<tr>';
+		
 	$r1 = "<td class='td'>". $row['Id_Sensore']."</td>";
 	$r2 = "<td class='td'>". $row['Fk_Utente']."  </td>";
 	$r3 = "<td class='td'>". $row['Marca']." </td>";
 	$r4 =  "<td class='td'>". $row['Tipologia']." </td>";
+	$r5 = '</tr>';
+	
+	echo htmlspecialchars($r0, ENT_QUOTES, 'UTF-8');
         echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
         echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
 	echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
 	echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
+	echo htmlspecialchars($r5, ENT_QUOTES, 'UTF-8');
          
           
-        echo "</tr>";
+        
         }
 
 ?>
@@ -308,17 +322,20 @@ echo"</tr>";
 
 }
 while ($row = mysqli_fetch_assoc($vis)) {
-		echo"<tr>";
+		$r0 ='<tr>';
 	$r1 = "<td class='td'>". $row['IdUtente']."</td>";
 	$r2 = "<td class='td'>". $row['NomeUtente']."</td>";
 	$r3 = "<td class='td'>". $row['EmailUtente']."</td>";
 	$r4 = "<td class='td'>". $row['PasswordUtente']."</td>";
+	$r5 = '</td>';
 	
+	echo htmlspecialchars($r0, ENT_QUOTES, 'UTF-8');
          echo htmlspecialchars($r1, ENT_QUOTES, 'UTF-8');
        echo htmlspecialchars($r2, ENT_QUOTES, 'UTF-8');
          echo htmlspecialchars($r3, ENT_QUOTES, 'UTF-8');
           echo htmlspecialchars($r4, ENT_QUOTES, 'UTF-8');
-        echo "</tr>";
+	echo htmlspecialchars($r5, ENT_QUOTES, 'UTF-8');
+     
         }
 
 ?>
