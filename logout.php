@@ -1,21 +1,21 @@
 <?php
 
-require "connessione.php";
+require 'connessione.php';
 session_start();
 
 if(session_unset ()){ 
-print("ok");
+print('ok');
 }
 else {
-print("no");
+print('no');
 }
 
 if(session_destroy ()){ 
-print("ok");
+print('ok');
 }
 else {
-print("no");
+print('no');
 }
 
-header("location:index.php");
+header('location:index.php');
 ?>
