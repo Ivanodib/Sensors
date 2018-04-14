@@ -31,7 +31,7 @@ $cerca = mysqli_prepare($connessione,"SELECT * FROM ApplicazioneEsterna WHERE Co
 	
 if(mysqli_num_rows($cerca)>0){
 
-$elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Codice = ?  ");
+//$elimina = mysqli_prepare($connessione,"DELETE FROM ApplicazioneEsterna WHERE Codice = ?  ");
 	mysqli_stmt_bind_param($elimina, "i", $idapp);
 	mysqli_stmt_execute($elimina);
 
