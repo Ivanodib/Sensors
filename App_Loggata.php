@@ -17,7 +17,7 @@ $_SESSION['prec'] = $n;
  //} //CANCELLA 
 
 //BLOCCO PER AVERE LE PREFERENZE
-$sql = mysqli_query($connessione,'SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$codice."' ');
+$sql = mysqli_query($connessione,"SELECT * FROM ApplicazioneEsterna WHERE Codice = '".$codice."' ");
 
 $row = mysqli_fetch_assoc($sql);
 $nomefile = 'Rilevazioni.csv';
@@ -26,8 +26,8 @@ $datiRilevazione = $row['Dati_trasferiti'];
 
 //BLOCCO PER CREARE I CAMPI NELLA SELECT DEI DATI 
 $query;
-$result = mysqli_query($connessione, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
- AND COLUMN_NAME NOT LIKE '".Fk_%."' ') ;
+$result = mysqli_query($connessione, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
+ AND COLUMN_NAME NOT LIKE '".Fk_%."' ") ;
 $i=0;
 
     while ($row = mysqli_fetch_assoc($result)) {
@@ -44,11 +44,11 @@ $i++;
  $query=substr($query, 0, -1);
 	
 
-  $querytot = "SELECT ".mysql_real_escape_string($query).' FROM Sensore
+  $querytot = "SELECT ".mysql_real_escape_string($query)." FROM Sensore
 							INNER JOIN RaccoltaDati ON `RaccoltaDati`.`Fk_Sensore` = `Sensore`.`Id_Sensore`
                             INNER JOIN Utenti ON `Sensore`.`Fk_Utente` = `Utenti`.`IdUtente`
 							INNER JOIN ApplicazioneEsterna ON `Utenti`.`IdUtente` = `ApplicazioneEsterna`.`Fk_Utente`
-                            WHERE `ApplicazioneEsterna`.`Codice` = '".mysql_real_escape_string($codice)."' ';
+                            WHERE `ApplicazioneEsterna`.`Codice` = '".mysql_real_escape_string($codice)."' ";
                             
                            
 //QUERY PER AVERE I DATI
