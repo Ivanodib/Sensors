@@ -147,7 +147,7 @@ $controlloUtente = mysqli_prepare($connessione, 'SELECT IdUtente FROM Utenti WHE
 //utente esistente, quindi elimino.
 if(mysqli_num_rows($risultatoUtente)>0){
 
-$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Utenti WHERE IdUtente = ?  ');                                             
+//$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Utenti WHERE IdUtente = ?  ');                                             
 	mysqli_stmt_bind_param($queryElimina, 'i', $idutente);
 	mysqli_stmt_execute($queryElimina);
 
