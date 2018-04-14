@@ -68,8 +68,8 @@ echo $r1;
 
 //non esiste
 else{
-$queryInserisci = mysqli_prepare($connesione, 'INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
-						VALUES(?,?,?,?) ' );
+//$queryInserisci = mysqli_prepare($connesione, 'INSERT INTO Sensore (Fk_Utente, Marca, Tipologia)
+//						VALUES(?,?,?,?) ' );
 	mysqli_stmt_bind_param($queryInserisci, 'iss', $fkutente, $m2, $t2);
         mysqli_stmt_execute ($queryInserisci);
 	
