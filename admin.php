@@ -236,10 +236,10 @@ if($flag_sens){
 $vis= mysqli_query($connessione, 'SELECT * FROM Sensore ORDER BY Fk_Utente ');
 
 $r1 = '<tr>';
-$r2 = '<th class='th'>CODICE SENSORE</th>';
-$r3 = '<th class='th'>CODICE UTENTE</th>';
-$r4 = '<th class='th'>MARCA</th>';
-$r5 = '<th class='th'>TIPOLOGIA</th>';
+$r2 = '<th class='"th"'>CODICE SENSORE</th>';
+$r3 = '<th class='"th"'>CODICE UTENTE</th>';
+$r4 = '<th class='"th"'>MARCA</th>';
+$r5 = '<th class='"th"'>TIPOLOGIA</th>';
 
 $r6 = '</tr>';
 	
