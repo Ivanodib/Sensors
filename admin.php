@@ -164,7 +164,7 @@ else{
 	$r2 = '<script> alert("Errore di rete");</script>';
 echo $r2;
 
-}
+
 }
 else {
 	$r3 = '<script> alert("Utente inesistente");</script>';
