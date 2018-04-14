@@ -1,5 +1,5 @@
 <?php
-include "connessione.php";
+include 'connessione.php';
 $flag=0;
 if(isset($_POST['AdminReg']))$flag=1;
 
@@ -37,7 +37,7 @@ else{
 //se email non esiste inserisco i dati
 
 $queryInserisci = mysqli_prepare($connessione, 'INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
-						VALUES('?','?','?','?') ');
+						VALUES(?,?,?,?) ');
 	
 	 mysqli_stmt_bind_param($queryInserisci, 'ssss', $nomeutente, $cognomeutente, $emailutente, $passwordutente);
 	mysqli_stmt_execute($queryInserisci);
