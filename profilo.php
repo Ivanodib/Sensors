@@ -228,11 +228,12 @@ $vis= mysqli_query($connessione, "SELECT * FROM ApplicazioneEsterna WHERE Fk_Ute
 	$r1 = 	"<tr>";
 	$r2 = 	"<th class='th'>CODICE</th>";
 		$r3 = "<th class='th'>NOME APPLICAZIONE</th>";
+		$r4 = echo"</tr>";
 echo $r1;
 echo $r2;
 echo $r3;
+echo $r4;
 
-echo"</tr>";
 
 }
 while ($row = mysqli_fetch_assoc($vis)) {
