@@ -104,7 +104,7 @@ $controlloSensore = mysqli_prepare($connessione, 'SELECT Id_Sensore FROM Sensore
 //sensore esistente, quindi elimino.
 if(mysqli_num_rows($risultatoSensore)>0){
 
-$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Sensore WHERE Id_Sensore = ?  ');                        
+//$queryElimina = mysqli_prepare($connessione, 'DELETE FROM Sensore WHERE Id_Sensore = ?  ');                        
 	mysqli_stmt_bind_param($queryElimina, 'i', $fksensore);
 	mysqli_stmt_execute($queryElimina);
 
