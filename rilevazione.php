@@ -4,11 +4,21 @@ include "connessione.php";
 if(isset($_POST['Stringa'])){
 $stringa = $_POST['Stringa'];
 
+define("NUM_MAX1", 10);
+define("NUM_MIN1", 0);	
+	
+define("NUM_MAX2", 19);
+	
+define("NUM_MAX3", 29);	
+define("NUM_MIN3", 3);
+	
+	define("NUM_MAX4", 50);
+define("NUM_MIN4", 33);	
 
-$Fk_Sensore = substr($stringa, 0, 10);
-$Data = substr($stringa, 10, 19); 
-$Rilevazione = substr($stringa, 29, 3);
-$Dettagli = substr($stringa, 33, 50);
+$Fk_Sensore = substr($stringa, NUM_MIN1, NUM_MAX1);
+$Data = substr($stringa, NUM_MAX1, NUM_MAX2); 
+$Rilevazione = substr($stringa, NUM_MAX3, NUM_MIN);
+$Dettagli = substr($stringa, NUM_MIN4, NUM_MAX4);
 $stringaSplitted = " $Fk_Sensore, $Data, $Rilevazione, $Dettagli ";	
 
 echo htmlspecialchars($stringaSplitted, ENT_QUOTES, 'UTF-8');
