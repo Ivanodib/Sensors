@@ -7,7 +7,7 @@ $flag_vis=0;
 $flag_dati=0;
 
 if(isset($_POST['Trasferisci'])){
-mysqli_query($connessione, "INSERT INTO Trasferimento (Flag) VALUES (1) ");
+//mysqli_query($connessione, "INSERT INTO Trasferimento (Flag) VALUES (1) ");
 }
 
 
