@@ -36,8 +36,8 @@ echo $r1;
 else{
 //se email non esiste inserisco i dati
 
-$queryInserisci = mysqli_prepare($connessione, 'INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
-						VALUES(?,?,?,?) ');
+//$queryInserisci = mysqli_prepare($connessione, 'INSERT INTO Utenti (NomeUtente, CognomeUtente, EmailUtente, PasswordUtente)
+//						VALUES(?,?,?,?) ');
 	
 	 mysqli_stmt_bind_param($queryInserisci, 'ssss', $nomeutente, $cognomeutente, $emailutente, $passwordutente);
 	mysqli_stmt_execute($queryInserisci);
