@@ -27,7 +27,7 @@ $datiRilevazione = $row['Dati_trasferiti'];
 //BLOCCO PER CREARE I CAMPI NELLA SELECT DEI DATI 
 $query;
 $result = mysqli_query($connessione, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME` IN ('RaccoltaDati', 'Sensore') AND COLUMN_NAME NOT LIKE 'Id_%'  
- AND COLUMN_NAME NOT LIKE '".Fk_%."' ") ;
+ AND COLUMN_NAME NOT LIKE Fk_% ") ;
 $i=0;
 
     while ($row = mysqli_fetch_assoc($result)) {
@@ -58,9 +58,9 @@ $file = fopen( $nomefile , 'w');
 
 
 while($rigafile = mysqli_fetch_assoc($totale)){
-	$str = $rigafile = chr(0xEF) . chr(0xBB) . chr(0xBF);
+	 $rigafile = chr(0xEF) . chr(0xBB) . chr(0xBF);
 
-	fputcsv($file,$str );
+	fputcsv($file,$rigafile );
   }
   
 fclose($file);
