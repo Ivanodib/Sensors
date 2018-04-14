@@ -1,25 +1,25 @@
 <?php
-include "connessione.php";
+include 'connessione.php';
 
 if(isset($_POST['Stringa'])){
 $stringa = $_POST['Stringa'];
 
-define("NUM_MAX1", 10);
-define("NUM_MIN1", 0);	
+define('NUM_MAX1', 10);
+define('NUM_MIN1', 0);	
 	
-define("NUM_MAX2", 19);
+define('NUM_MAX2', 19);
 	
-define("NUM_MAX3", 29);	
-define("NUM_MIN3", 3);
+define('NUM_MAX3', 29);	
+define('NUM_MIN3', 3);
 	
-	define("NUM_MAX4", 50);
-define("NUM_MIN4", 33);	
+	define('NUM_MAX4', 50);
+define('NUM_MIN4', 33);	
 
 $Fk_Sensore = substr($stringa, NUM_MIN1, NUM_MAX1);
 $Data = substr($stringa, NUM_MAX1, NUM_MAX2); 
 $Rilevazione = substr($stringa, NUM_MAX3, NUM_MIN);
 $Dettagli = substr($stringa, NUM_MIN4, NUM_MAX4);
-$stringaSplitted = " $Fk_Sensore, $Data, $Rilevazione, $Dettagli ";	
+$stringaSplitted = ' $Fk_Sensore, $Data, $Rilevazione, $Dettagli ';	
 
 echo htmlspecialchars($stringaSplitted, ENT_QUOTES, 'UTF-8');
 //"00000000092018-03-17 12:39:4429°RilevazioneSenzaErrori"
@@ -27,10 +27,10 @@ echo htmlspecialchars($stringaSplitted, ENT_QUOTES, 'UTF-8');
 
 
 
-$inserisciRiv = mysqli_prepare($connessione, "INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
-				VALUES ('?','?','?','?') ");
+$inserisciRiv = mysqli_prepare($connessione, 'INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
+				VALUES ('?','?','?','?') ');
                 
- mysqli_stmt_bind_param($inserisciRiv, "isss", $Fk_Sensore, NOW(), $Rilevazione, $Dettagli);
+ mysqli_stmt_bind_param($inserisciRiv, 'isss', $Fk_Sensore, NOW(), $Rilevazione, $Dettagli);
 	mysqli_stmt_execute($InserisciRiv);             
 
 if(isset($risultatoInserimento)){
