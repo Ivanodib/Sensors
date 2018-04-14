@@ -23,10 +23,25 @@ $row = mysqli_fetch_array($risultatoEmail,MYSQLI_ASSOC);
 
 //login
 	if(isset($row['NomeUtente'])){
-$_SESSION['NomeUtente'] = $row['NomeUtente'];
+
+		
+		$value = $row["NomeUtente"];
+  		preg_match("/(\d{4})-(\d{2})-(\d{2})/", $value, $results); //FIXED
+  
+  if(sizeof($results) > 0){
+    $_SESSION["NomeUtente"] = $value; //OK
+  }
+		
+		
+		
 	}
 	if(isset($row['IdUtente'])){
-$_SESSION['id'] = $row['IdUtente'];
+		$value2 = $row['IdUtente'];
+		preg_match("/(\d{4})-(\d{2})-(\d{2})/", $value2, $results2); //FIXED
+  
+  if(sizeof($results2) > 0){
+    $_SESSION["id"] = $value2; //OK
+  }
 	}
 	
 	
@@ -68,8 +83,22 @@ mysqli_stmt_execute($controlloLoginApp);
 if(mysqli_num_rows($risultatoApp)>0){
 
 $row = mysqli_fetch_array($risultatoApp,MYSQLI_ASSOC);
-$_SESSION['idapp'] = $row['Codice'];
-$_SESSION['nomeapp'] = $row['Nome'];
+	
+	$val1 = $row['Codice'];
+	preg_match("/(\d{4})-(\d{2})-(\d{2})/", $val1, $results1); //FIXED
+  
+  if(sizeof($results1) > 0){
+    $_SESSION["idapp"] = $val1; //OK
+  }
+	
+	$val2 = $row['Nome'];
+	preg_match("/(\d{4})-(\d{2})-(\d{2})/", $val2, $results2); //FIXED
+  
+  if(sizeof($results2) > 0){
+    $_SESSION["nomeapp"] = $val2; //OK
+  }
+	
+	
 
 header('location: App_Loggata.php');
 }
