@@ -27,8 +27,8 @@ echo htmlspecialchars($stringaSplitted, ENT_QUOTES, 'UTF-8');
 
 
 
-$inserisciRiv = mysqli_prepare($connessione, 'INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
-				VALUES (?,?,?,?) ');
+//$inserisciRiv = mysqli_prepare($connessione, 'INSERT INTO RaccoltaDati (Fk_Sensore, Data, Rilevazione, Dettagli)
+//				VALUES (?,?,?,?) ');
                 
  mysqli_stmt_bind_param($inserisciRiv, 'isss', $Fk_Sensore, NOW(), $Rilevazione, $Dettagli);
 	mysqli_stmt_execute($InserisciRiv);             
