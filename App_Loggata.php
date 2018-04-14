@@ -48,7 +48,7 @@ $i++;
 							INNER JOIN RaccoltaDati ON `RaccoltaDati`.`Fk_Sensore` = `Sensore`.`Id_Sensore`
                             INNER JOIN Utenti ON `Sensore`.`Fk_Utente` = `Utenti`.`IdUtente`
 							INNER JOIN ApplicazioneEsterna ON `Utenti`.`IdUtente` = `ApplicazioneEsterna`.`Fk_Utente`
-                            WHERE `ApplicazioneEsterna`.`Codice` = ".mysql_real_escape_string($codice)."' ;
+                            WHERE `ApplicazioneEsterna`.`Codice` = '".mysql_real_escape_string($codice)."' ';
                             
                            
 //QUERY PER AVERE I DATI
